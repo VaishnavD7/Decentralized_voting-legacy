@@ -1,0 +1,256 @@
+[
+  {
+    "id": 2,
+    "title": "COLLEGE-HOD",
+    "start_time": 1771428168,
+    "end_time": 1771514568,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 2,
+    "created_at": "2026-02-16 18:29:00",
+    "candidates": [
+      {
+        "id": 3,
+        "election_id": 2,
+        "blockchain_id": 1,
+        "name": "1",
+        "party": "BJP",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 8,
+        "election_id": 2,
+        "blockchain_id": 1,
+        "name": "SONKAR",
+        "party": "COMP",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 9,
+        "election_id": 2,
+        "blockchain_id": 2,
+        "name": "OM",
+        "party": "IT",
+        "vote_count": 0,
+        "symbol": null
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "G",
+    "start_time": 1771434533,
+    "end_time": 1771520933,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-15 10:55:42",
+    "candidates": [
+      {
+        "id": 1,
+        "election_id": 3,
+        "blockchain_id": 1,
+        "name": "1",
+        "party": "POM",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 4,
+        "election_id": 3,
+        "blockchain_id": 1,
+        "name": "1",
+        "party": "BJP",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 5,
+        "election_id": 3,
+        "blockchain_id": 2,
+        "name": "2",
+        "party": "NCP",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 10,
+        "election_id": 3,
+        "blockchain_id": 1,
+        "name": "JJJ",
+        "party": "NCP",
+        "vote_count": 0,
+        "symbol": null
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "COLLEGE",
+    "start_time": 1771246682,
+    "end_time": 1771333082,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-16 12:58:09",
+    "candidates": [
+      {
+        "id": 2,
+        "election_id": 4,
+        "blockchain_id": 1,
+        "name": "3",
+        "party": "OM",
+        "vote_count": 0,
+        "symbol": null
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "h",
+    "start_time": 1771421866,
+    "end_time": 1771508266,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 2,
+    "created_at": "2026-02-18 13:37:46",
+    "candidates": [
+      {
+        "id": 6,
+        "election_id": 5,
+        "blockchain_id": 1,
+        "name": "1",
+        "party": "BJP",
+        "vote_count": 0,
+        "symbol": null
+      },
+      {
+        "id": 7,
+        "election_id": 5,
+        "blockchain_id": 2,
+        "name": "2",
+        "party": "NCP",
+        "vote_count": 0,
+        "symbol": null
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "J",
+    "start_time": 1771508956,
+    "end_time": 1771595356,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 0,
+    "created_at": "2026-02-19 13:49:20",
+    "candidates": []
+  },
+  {
+    "id": 11,
+    "title": "HU",
+    "start_time": 1776087385,
+    "end_time": 1776173785,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 0,
+    "created_at": "2026-04-13 13:36:25",
+    "candidates": []
+  },
+  {
+    "id": 1771506535243,
+    "title": "Test Election V2",
+    "start_time": 1771506535,
+    "end_time": 1771510135,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-19 13:08:55",
+    "candidates": [
+      {
+        "id": 11,
+        "election_id": 1771506535243,
+        "blockchain_id": 999,
+        "name": "Candidate One",
+        "party": "Party A",
+        "vote_count": 0,
+        "symbol": "🦅"
+      }
+    ]
+  },
+  {
+    "id": 1771506634458,
+    "title": "Test Election V2",
+    "start_time": 1771506634,
+    "end_time": 1771510234,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-19 13:10:34",
+    "candidates": [
+      {
+        "id": 12,
+        "election_id": 1771506634458,
+        "blockchain_id": 999,
+        "name": "Candidate One",
+        "party": "Party A",
+        "vote_count": 0,
+        "symbol": "🦅"
+      }
+    ]
+  },
+  {
+    "id": 1771506660722,
+    "title": "Test Election V2",
+    "start_time": 1771506660,
+    "end_time": 1771510260,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-19 13:11:00",
+    "candidates": [
+      {
+        "id": 13,
+        "election_id": 1771506660722,
+        "blockchain_id": 999,
+        "name": "Candidate One",
+        "party": "Party A",
+        "vote_count": 0,
+        "symbol": "🦅"
+      }
+    ]
+  },
+  {
+    "id": 1771506688900,
+    "title": "Test Election V2",
+    "start_time": 1771506688,
+    "end_time": 1771510288,
+    "active": 1,
+    "show_results": 0,
+    "deleted": 0,
+    "candidate_count": 1,
+    "created_at": "2026-02-19 13:11:28",
+    "candidates": [
+      {
+        "id": 14,
+        "election_id": 1771506688900,
+        "blockchain_id": 999,
+        "name": "Candidate One",
+        "party": "Party A",
+        "vote_count": 0,
+        "symbol": "🦅"
+      }
+    ]
+  }
+]

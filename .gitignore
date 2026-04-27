@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Environment variables (NEVER push these)
+.env
+.env.local
+.env.production
+
+# Build outputs
+client/dist/
+client/dist-ssr/
+
+# Database files
+server/data/
+server/*.db
+*.db
+
+# Hardhat / Blockchain artifacts & cache
+contracts/cache/
+contracts/artifacts/
+# BUT we need client/src/artifacts for the ABI, so don't ignore that
+
+# Logs
+*.log
+server/server.log
+server/server_output.txt
+server/startup_log.txt
+server/test_output.txt
+server/test_success.txt
+contracts/deploy.log
+contracts/deploy_log.txt
+contracts/deploy_err.txt
+contracts/deployed_addr.txt
+contracts/run_log.txt
+contracts/seed_log.txt
+contracts/seed_log_2.txt
+contracts/seed_retry.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Lock files (optional - some teams keep these)
+# package-lock.json

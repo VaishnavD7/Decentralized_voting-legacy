@@ -1,0 +1,201 @@
+{
+  "passed": 48,
+  "failed": 0,
+  "skipped": 0,
+  "total": 48,
+  "passRate": "100.0",
+  "results": [
+    {
+      "status": "PASS",
+      "label": "[API] Server is reachable"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] Health endpoint returns status"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /settings returns config"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /voters returns array"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /voters?status=APPROVED filters correctly"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /voters/:address for admin wallet"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /voters/:address returns 404 for non-existent"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /elections returns array"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /community/messages returns array (or error)"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /community/messages rejects empty body"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /auth/config returns admin wallet"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/register rejects missing fields"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/login rejects missing credentials"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/send-otp rejects invalid request"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/verify-otp rejects invalid request"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/send-sms rejects invalid request"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] POST /auth/verify-sms rejects invalid request"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] GET /auth/me rejects unauthenticated request"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] PATCH /voters/:addr/status rejects without auth"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] PATCH /voters/:addr/role rejects without auth"
+    },
+    {
+      "status": "PASS",
+      "label": "[API] DELETE /voters/:addr rejects without auth"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Connect to deployed contract"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Read election count"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Get all elections"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Create new test election"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Add candidate 1 (Alice)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Add candidate 2 (Bob)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Add candidate 3 (Charlie)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Verify candidates were added"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Voter 1 casts vote for Alice (candidate 1)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Voter 2 casts vote for Bob (candidate 2)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Voter 3 casts vote for Alice (candidate 1)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Verify vote counts (Alice:2, Bob:1, Charlie:0)"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Double vote is rejected"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Toggle results to visible"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Set election status back to active"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Soft delete election"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Non-admin cannot create election"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Non-admin cannot add candidate"
+    },
+    {
+      "status": "PASS",
+      "label": "[CONTRACT] Non-admin cannot delete election"
+    },
+    {
+      "status": "PASS",
+      "label": "[INTEGRATION] Backend election data matches contract state"
+    },
+    {
+      "status": "PASS",
+      "label": "[INTEGRATION] Admin wallet in settings matches .env"
+    },
+    {
+      "status": "PASS",
+      "label": "[INTEGRATION] Contract address file matches deployed contract"
+    },
+    {
+      "status": "PASS",
+      "label": "[INTEGRATION] Frontend Vite dev server is accessible"
+    },
+    {
+      "status": "PASS",
+      "label": "[SECURITY] Server has security headers (Helmet)"
+    },
+    {
+      "status": "PASS",
+      "label": "[SECURITY] Rate limiter is active"
+    },
+    {
+      "status": "PASS",
+      "label": "[SECURITY] Invalid JWT is rejected"
+    },
+    {
+      "status": "PASS",
+      "label": "[SECURITY] SQL injection attempt is handled"
+    }
+  ]
+}

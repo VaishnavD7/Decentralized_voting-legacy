@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Voting System (D-Vote) Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', user-scalable, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+            color: #e74c3c;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #e1e4e8;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        blockquote {
+            border-left: 4px solid #3498db;
+            margin: 0;
+            padding-left: 15px;
+            color: #7f8c8d;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-button" onclick="window.print()">🖨️ Save as PDF</button>
+
+    <h1>🗳️ Decentralized Voting System (D-Vote)</h1>
+    <p>Welcome to <strong>D-Vote</strong>, a cutting-edge hybrid voting application that combines the
+        <strong>immutability of blockchain</strong> with the <strong>usability of biometric identity
+            verification</strong>.</p>
+
+    <p>This system ensures that:</p>
+    <ol>
+        <li><strong>One Person = One Vote</strong>: Using facial recognition to prevent Sybil attacks (fake accounts).
+        </li>
+        <li><strong>Tamper-Proof Results</strong>: All votes are recorded on the Ethereum blockchain and cannot be
+            altered or deleted.</li>
+        <li><strong>Transparency</strong>: Anyone can verify the election results directly from the blockchain.</li>
+    </ol>
+
+    <h2>🏗️ System Architecture</h2>
+    <p>The project follows a <strong>3-Tier Architecture</strong>:</p>
+
+    <h3>1. Client (Frontend)</h3>
+    <ul>
+        <li><strong>Role</strong>: User Interface & Biometric Capture.</li>
+        <li><strong>Tech</strong>: React, Vite, Tailwind CSS.</li>
+        <li><strong>Key Libraries</strong>:
+            <ul>
+                <li><code>face-api.js</code>: AI model for scanning faces directly in the browser.</li>
+                <li><code>ethers.js</code>: Library to talk to the Blockchain (MetaMask).</li>
+                <li><code>axios</code>: HTTP client to talk to the Admin Server.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>2. Server (Backend)</h3>
+    <ul>
+        <li><strong>Role</strong>: Identity Authority & Admin API.</li>
+        <li><strong>Tech</strong>: Node.js, Express.</li>
+        <li><strong>Database</strong>: SQLite (<code>voting.db</code>).</li>
+        <li><strong>Responsibilities</strong>:
+            <ul>
+                <li>Stores <code>Wallet Address</code> &harr; <code>Face Descriptor</code> mappings.</li>
+                <li>Prevents duplicate registrations (Uniqueness Check).</li>
+                <li>Manages Admin features (Creating elections, adding candidates).</li>
+                <li>Provides detailed API for app metadata.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3. Blockchain (Smart Contracts)</h3>
+    <ul>
+        <li><strong>Role</strong>: The Trust Layer.</li>
+        <li><strong>Tech</strong>: Hardhat, Solidity.</li>
+        <li><strong>Contract</strong>: <code>Voting.sol</code>.</li>
+        <li><strong>Responsibilities</strong>:
+            <ul>
+                <li>Stores the "State of Truth" for elections (Titles, Start/End Times).
+                <li>Records votes (Who voted for Whom).</li>
+                <li>Calculates results.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>🛠️ Technology Stack</h2>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>Technology</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Frontend</strong></td>
+            <td>React 19</td>
+            <td>Modern UI library with Hooks.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Vite</td>
+            <td>Blazing fast build tool.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Tailwind CSS</td>
+            <td>Utility-first styling framework.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>face-api.js</td>
+            <td>TensorFlow.js based face recognition.</td>
+        </tr>
+        <tr>
+            <td><strong>Backend</strong></td>
+            <td>Node.js / Express</td>
+            <td>Robust REST API server.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>SQLite</td>
+            <td>Lightweight, file-based SQL database.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>JWT</td>
+            <td>JSON Web Tokens for secure authentication.</td>
+        </tr>
+        <tr>
+            <td><strong>Blockchain</strong></td>
+            <td>Solidity 0.8.20</td>
+            <td>Smart Contract language.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Hardhat</td>
+            <td>Ethereum development environment.</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Ethers.js v6</td>
+            <td>Blockchain interaction library.</td>
+        </tr>
+    </table>
+
+    <h2>📋 Prerequisites</h2>
+    <p>Before running the project, ensure you have the following installed:</p>
+    <ol>
+        <li><strong>Node.js</strong> (v16.x or higher) - <code>node -v</code></li>
+        <li><strong>Git</strong> - <code>git --version</code></li>
+        <li><strong>MetaMask Wallet</strong> (Browser Extension)</li>
+    </ol>
+
+    <h2>🚀 Installation & Setup</h2>
+
+    <h3>1. Clone the Repository</h3>
+    <pre><code>git clone &lt;repository_url&gt;
+cd decentralized-voting</code></pre>
+
+    <h3>2. Install Dependencies</h3>
+    <pre><code># Root
+npm install
+
+# Contracts
+cd contracts
+npm install
+
+# Server
+cd ../server
+npm install
+
+# Client
+cd ../client
+npm install</code></pre>
+
+    <h2>🏃‍♂️ Execution Guide</h2>
+    <p>Use <strong>three separate terminals</strong> to run the full stack.</p>
+
+    <h3>Terminal 1: The Blockchain Network</h3>
+    <pre><code>cd contracts
+npx hardhat node</code></pre>
+    <blockquote>Output: List of 20 Accounts with Private Keys. <strong>Keep running.</strong></blockquote>
+
+    <h3>Terminal 2: Deployment & Server</h3>
+    <pre><code>cd contracts
+# Deploy & Seed
+npx hardhat run scripts/deploy.js --network localhost
+npx hardhat run scripts/seed-data.js --network localhost
+
+# Start Backend
+cd ../server
+npm start</code></pre>
+
+    <h3>Terminal 3: Frontend Client</h3>
+    <pre><code>cd client
+npm run dev</code></pre>
+
+    <h2>🎮 Usage Workflows</h2>
+
+    <h3>1. Configure MetaMask</h3>
+    <ul>
+        <li>Network Name: <strong>Localhost 8545</strong></li>
+        <li>RPC URL: <code>http://127.0.0.1:8545</code></li>
+        <li>Chain ID: <code>1337</code></li>
+        <li>Currency Symbol: <code>ETH</code></li>
+        <li><strong>Import Account</strong>: Use Private Key from Terminal 1.</li>
+    </ul>
+
+    <h3>2. User Registration</h3>
+    <p>Go to the app, connect wallet, scan face. The server ensures your face is unique.</p>
+
+    <h3>3. Admin Dashboard</h3>
+    <p>Login with <code>admin</code> / <code>admin123</code>. Create elections, add candidates with symbols (🦅, 🍎).
+    </p>
+
+    <h3>4. Voting</h3>
+    <p>Select election, vote for candidate, sign transaction in MetaMask. Result is on-chain.</p>
+
+    <h2>📡 API Documentation (Backend)</h2>
+    <p>Base URL: <code>http://localhost:5000/api</code></p>
+    <ul>
+        <li><code>POST /auth/register</code>: Register voter.</li>
+        <li><code>POST /auth/admin/login</code>: Admin login.</li>
+        <li><code>GET /elections</code>: List elections.</li>
+        <li><code>POST /elections/:id/votes</code>: Record vote.</li>
+    </ul>
+
+    <h2>💾 Database Schema (SQLite)</h2>
+    <ul>
+        <li><strong>voters</strong>: Wallet, Face Descriptor, Name.</li>
+        <li><strong>admins</strong>: Username, Password.</li>
+        <li><strong>votes</strong>: Voter ID, Election ID, Transaction Hash.</li>
+        <li><strong>elections</strong>: Metadata mirrors blockchain.</li>
+    </ul>
+
+    <hr>
+    <p><em>Generated on 2026-02-19</em></p>
+</body>
+
+</html>
