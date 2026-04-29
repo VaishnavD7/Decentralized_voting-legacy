@@ -3,6 +3,31 @@ import { User, Mail, Phone, MapPin, Shield, Save, CheckCircle, AlertTriangle, Ca
 
 const API_BASE = import.meta.env.VITE_API_URL;
 
+// Defined OUTSIDE the component to prevent re-creation on every render (fixes input focus loss)
+const InfoRow = ({ icon: Icon, label, value }) => (
+    <div className="flex items-start gap-4 p-5 bg-white/[0.02] border border-white/5 rounded-2xl">
+        <div className="w-10 h-10 bg-indigo-500/10 rounded-xl flex items-center justify-center shrink-0">
+            <Icon className="text-indigo-400" size={18} />
+        </div>
+        <div>
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{label}</p>
+            <p className="text-white font-medium text-sm">{value || '—'}</p>
+        </div>
+    </div>
+);
+
+const EditField = ({ label, value, onChange, type = 'text' }) => (
+    <div className="space-y-2">
+        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</label>
+        <input
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="w-full px-5 py-4 bg-white/[0.03] border border-white/5 rounded-xl text-white text-sm font-medium placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-all"
+        />
+    </div>
+);
+
 const ProfileSection = ({ user, account, contract }) => {
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -46,29 +71,6 @@ const ProfileSection = ({ user, account, contract }) => {
         }
     };
 
-    const InfoRow = ({ icon: Icon, label, value }) => (
-        <div className="flex items-start gap-4 p-5 bg-white/[0.02] border border-white/5 rounded-2xl">
-            <div className="w-10 h-10 bg-indigo-500/10 rounded-xl flex items-center justify-center shrink-0">
-                <Icon className="text-indigo-400" size={18} />
-            </div>
-            <div>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">{label}</p>
-                <p className="text-white font-medium text-sm">{value || '—'}</p>
-            </div>
-        </div>
-    );
-
-    const EditField = ({ label, value, onChange, type = 'text' }) => (
-        <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="w-full px-5 py-4 bg-white/[0.03] border border-white/5 rounded-xl text-white text-sm font-medium placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 transition-all"
-            />
-        </div>
-    );
 
     return (
         <div className="w-full max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
