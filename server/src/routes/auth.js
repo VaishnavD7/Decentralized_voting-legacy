@@ -16,4 +16,12 @@ router.get('/config', (req, res) => {
     res.json({ adminWallet: process.env.ADMIN_WALLET || '' });
 });
 
+// EMERGENCY WIPE (Temporary for setup)
+router.get('/emergency-wipe/:wallet', async (req, res) => {
+    const { query } = require('../config/db');
+    const wallet = req.params.wallet.toLowerCase();
+    await query('DELETE FROM voters WHERE wallet_address = $1', [wallet]);
+    res.send(`Identity ${wallet} Purged from Matrix. You can now re-register.`);
+});
+
 module.exports = router;
