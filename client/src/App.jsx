@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     fetchAdminWallet();
-  }, []);
+  }, [account]); // Re-fetch when account changes to ensure fresh config
 
   const fetchAdminWallet = async () => {
     try {
@@ -190,6 +190,8 @@ function App() {
 
   const isAdmin = (user && user.role?.toLowerCase() === 'admin') || 
                   (account && adminWallet && adminWallet.toLowerCase().split(',').map(w => w.trim()).includes(account.toLowerCase()));
+
+  console.log(`[ADMIN CHECK] isAdmin: ${isAdmin}, role: ${user?.role}, account: ${account?.substring(0,6)}, adminWallet: ${adminWallet?.substring(0,10)}...`);
 
   const NavItem = ({ id, label, icon: Icon }) => (
     <button
