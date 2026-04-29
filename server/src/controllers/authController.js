@@ -146,13 +146,20 @@ exports.login = async (req, res) => {
         const adminWallet = (process.env.ADMIN_WALLET || '').toLowerCase();
         const isNominatedAdmin = walletAddress === adminWallet;
 
-        // Force role update if needed
-        const role = isNominatedAdmin ? 'ADMIN' : user.role;
-
+        // Force role update in DB if this is the nominated admin logging in
+        let role = user.role;
+        let status = user.status;
+        
+        if (isNominatedAdmin && (user.role !== 'ADMIN' || user.status !== 'APPROVED')) {
+            console.log(`[AUTH] Auto-promoting ${walletAddress} to ADMIN status.`);
+            await query('UPDATE voters SET role = $1, status = $2 WHERE wallet_address = $3', ['ADMIN', 'APPROVED', walletAddress]);
+            role = 'ADMIN';
+            status = 'APPROVED';
+        }
 
         const token = jwt.sign({ id: user.id, walletAddress: user.wallet_address, role }, JWT_SECRET, { expiresIn: '24h' });
 
-        res.json({ success: true, token, user: { ...user, role } });
+        res.json({ success: true, token, user: { ...user, role, status } });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Server error' });
