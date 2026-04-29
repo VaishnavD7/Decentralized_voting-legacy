@@ -8,6 +8,8 @@ const transporter = nodemailer.createTransport({
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
     },
+    logger: true, // Log to console
+    debug: true,  // Include SMTP traffic in logs
 });
 
 exports.sendOTP = async (email, otp) => {

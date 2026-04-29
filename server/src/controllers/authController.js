@@ -229,6 +229,7 @@ exports.sendOTP = async (req, res) => {
             const { sendOTP } = require('../services/emailService');
             await sendOTP(email, otp);
         } catch (emailErr) {
+            console.error(`[SMTP ERROR] Full details:`, emailErr);
             console.error(`[OTP WARNING] Failed to send email to ${email}. Check SMTP settings. Proceeding with console OTP.`);
         }
 
