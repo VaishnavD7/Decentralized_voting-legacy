@@ -41,8 +41,8 @@ exports.register = async (req, res) => {
         }
 
         walletAddress = walletAddress.toLowerCase();
-        const adminWallet = (process.env.ADMIN_WALLET || '').toLowerCase();
-        const isNominatedAdmin = walletAddress === adminWallet;
+        const adminWallets = (process.env.ADMIN_WALLET || '').toLowerCase().split(',').map(w => w.trim());
+        const isNominatedAdmin = adminWallets.includes(walletAddress);
         const role = isNominatedAdmin ? 'ADMIN' : 'VOTER';
         const status = isNominatedAdmin ? 'APPROVED' : 'PENDING';
 
