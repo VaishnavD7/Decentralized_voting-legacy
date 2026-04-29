@@ -28,12 +28,20 @@ router.get('/emergency-wipe/:wallet', async (req, res) => {
 router.get('/master-reset-database', async (req, res) => {
     try {
         const { query } = require('../config/db');
+        
+        // Delete in order to satisfy Foreign Key constraints
+        await query('DELETE FROM messages');
+        await query('DELETE FROM votes');
+        await query('DELETE FROM candidates');
+        await query('DELETE FROM elections');
         await query('DELETE FROM voters');
         await query('DELETE FROM otps');
         await query('DELETE FROM mobile_otps');
-        // If there are elections, we keep the contract logic but clear the cache if any
-        res.send("<h1>Database Purged Successfully</h1><p>All voters and temporary codes have been deleted. You can now start fresh.</p>");
+        await query('DELETE FROM admins');
+        
+        res.send("<h1>Database Purged Successfully</h1><p>All data has been wiped. You can now start fresh with a clean system.</p>");
     } catch (err) {
+        console.error("Master Reset Error:", err);
         res.status(500).send("Reset failed: " + err.message);
     }
 });
