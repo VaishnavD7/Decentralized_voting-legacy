@@ -1,0 +1,139 @@
+{
+  "total": 33,
+  "passed": 33,
+  "failed": 0,
+  "results": [
+    {
+      "name": "1.1 GET /api/health returns operational status",
+      "status": "PASS"
+    },
+    {
+      "name": "1.2 GET /api/settings returns app settings",
+      "status": "PASS"
+    },
+    {
+      "name": "1.3 GET /api/auth/config returns admin wallet",
+      "status": "PASS"
+    },
+    {
+      "name": "2.1 Admin login with correct credentials",
+      "status": "PASS"
+    },
+    {
+      "name": "2.2 Admin login with wrong password REJECTS",
+      "status": "PASS"
+    },
+    {
+      "name": "2.3 Admin login with missing fields REJECTS",
+      "status": "PASS"
+    },
+    {
+      "name": "2.4 Admin login with nonexistent user REJECTS",
+      "status": "PASS"
+    },
+    {
+      "name": "3.1 Register voter with valid data",
+      "status": "PASS"
+    },
+    {
+      "name": "3.2 Registration rejects missing wallet address",
+      "status": "PASS"
+    },
+    {
+      "name": "3.3 Registration rejects missing name",
+      "status": "PASS"
+    },
+    {
+      "name": "3.4 Registration rejects missing face descriptor",
+      "status": "PASS"
+    },
+    {
+      "name": "3.5 Registration rejects invalid face descriptor (wrong length)",
+      "status": "PASS"
+    },
+    {
+      "name": "3.6 Registration rejects duplicate wallet address",
+      "status": "PASS"
+    },
+    {
+      "name": "3.7 Register second voter with different face",
+      "status": "PASS"
+    },
+    {
+      "name": "4.1 Login with correct face descriptor",
+      "status": "PASS"
+    },
+    {
+      "name": "4.2 Login rejects without face descriptor",
+      "status": "PASS"
+    },
+    {
+      "name": "4.3 Login rejects unregistered wallet",
+      "status": "PASS"
+    },
+    {
+      "name": "4.4 Login rejects mismatched face (different person)",
+      "status": "PASS"
+    },
+    {
+      "name": "5.1 GET /api/voters returns all voters",
+      "status": "PASS"
+    },
+    {
+      "name": "5.2 GET /api/voters/:wallet returns specific voter",
+      "status": "PASS"
+    },
+    {
+      "name": "5.3 GET /api/voters/:wallet returns 404 for unknown wallet",
+      "status": "PASS"
+    },
+    {
+      "name": "6.1 Protected route rejects without token",
+      "status": "PASS"
+    },
+    {
+      "name": "6.2 Protected route rejects with invalid token",
+      "status": "PASS"
+    },
+    {
+      "name": "6.3 Protected route accepts valid token",
+      "status": "PASS"
+    },
+    {
+      "name": "7.1 Send OTP requires email",
+      "status": "PASS"
+    },
+    {
+      "name": "7.2 Send OTP accepts valid email",
+      "status": "PASS"
+    },
+    {
+      "name": "7.3 Verify OTP with dev backdoor (123456)",
+      "status": "PASS"
+    },
+    {
+      "name": "7.4 Verify OTP rejects wrong code",
+      "status": "PASS"
+    },
+    {
+      "name": "7.5 Verify OTP rejects missing fields",
+      "status": "PASS"
+    },
+    {
+      "name": "8.1 GET /api/elections returns array",
+      "status": "PASS"
+    },
+    {
+      "name": "9.1 GET /api/community/messages returns array",
+      "status": "PASS"
+    },
+    {
+      "name": "9.2 POST /api/community/messages sends a message",
+      "status": "PASS"
+    },
+    {
+      "name": "9.3 GET community messages includes sent message",
+      "status": "PASS"
+    }
+  ]
+}

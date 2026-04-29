@@ -4,6 +4,23 @@ import FaceScanner from './FaceScanner.jsx';
 
 const API_BASE = import.meta.env.VITE_API_URL;
 
+// Defined OUTSIDE the component to prevent re-creation on every render (fixes input focus loss)
+const InputField = ({ label, value, onChange, type = 'text', placeholder, icon: Icon }) => (
+    <div className="space-y-2">
+        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            {Icon && <Icon size={12} />}
+            {label}
+        </label>
+        <input
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            className="w-full px-5 py-4 bg-white/[0.03] border border-white/5 rounded-xl text-white text-sm font-medium placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/20 transition-all"
+        />
+    </div>
+);
+
 const RegistrationForm = ({ account, adminWallet, onRegisterSuccess }) => {
     const [step, setStep] = useState(1); // 1: info, 2: verification, 3: face scan
     const [loading, setLoading] = useState(false);
@@ -128,21 +145,6 @@ const RegistrationForm = ({ account, adminWallet, onRegisterSuccess }) => {
         }
     };
 
-    const InputField = ({ label, value, onChange, type = 'text', placeholder, icon: Icon }) => (
-        <div className="space-y-2">
-            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
-                {Icon && <Icon size={12} />}
-                {label}
-            </label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                className="w-full px-5 py-4 bg-white/[0.03] border border-white/5 rounded-xl text-white text-sm font-medium placeholder:text-slate-600 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/20 transition-all"
-            />
-        </div>
-    );
 
     return (
         <div className="w-full max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
