@@ -143,8 +143,8 @@ exports.login = async (req, res) => {
             return res.status(400).json({ error: 'Biometric scan required for login.' });
         }
 
-        const adminWallet = (process.env.ADMIN_WALLET || '').toLowerCase();
-        const isNominatedAdmin = walletAddress === adminWallet;
+        const adminWallets = (process.env.ADMIN_WALLET || '').toLowerCase().split(',').map(w => w.trim());
+        const isNominatedAdmin = adminWallets.includes(walletAddress);
 
         // Force role update in DB if this is the nominated admin logging in
         let role = user.role;

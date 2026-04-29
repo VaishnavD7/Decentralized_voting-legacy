@@ -188,7 +188,8 @@ function App() {
     }
   };
 
-  const isAdmin = (user && user.role?.toLowerCase() === 'admin') || (account && adminWallet && account.toLowerCase() === adminWallet.toLowerCase());
+  const isAdmin = (user && user.role?.toLowerCase() === 'admin') || 
+                  (account && adminWallet && adminWallet.toLowerCase().split(',').map(w => w.trim()).includes(account.toLowerCase()));
 
   const NavItem = ({ id, label, icon: Icon }) => (
     <button
