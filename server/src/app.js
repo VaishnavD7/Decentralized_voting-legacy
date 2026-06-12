@@ -55,4 +55,9 @@ initDb().then(() => {
     });
 });
 
+app.use((err, req, res, next) => {
+    console.error('GLOBAL ERROR:', err);
+    res.status(500).json({ error: err.message, stack: err.stack });
+});
+
 module.exports = app;
