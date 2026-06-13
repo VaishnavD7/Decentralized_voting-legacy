@@ -10,6 +10,8 @@ const transporter = nodemailer.createTransport({
     },
     logger: true, // Log to console
     debug: true,  // Include SMTP traffic in logs
+    connectionTimeout: 10000, // Fail after 10 seconds if it hangs
+    greetingTimeout: 10000,
 });
 
 exports.sendOTP = async (email, otp) => {
