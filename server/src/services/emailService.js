@@ -3,76 +3,89 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT == 465, // true for 465, false for other ports
+    secure: process.env.SMTP_PORT == 465,
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
     },
-    logger: true, // Log to console
-    debug: true,  // Include SMTP traffic in logs
-    connectionTimeout: 10000, // Fail after 10 seconds if it hangs
+    logger: true,
+    debug: true,
+    connectionTimeout: 10000,
     greetingTimeout: 10000,
 });
 
-exports.sendOTP = async (email, otp) => {
-    const mailOptions = {
+const sendEmail = async (to, subject, text, html) => {
+    // If user has set up the Google Apps Script Webhook (bypasses Render SMTP block)
+    if (process.env.GOOGLE_SCRIPT_URL) {
+        console.log(`[EMAIL] Sending via Google Webhook to ${to}`);
+        const response = await fetch(process.env.GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ to, subject, html: html || text })
+        });
+        const result = await response.json();
+        if (!result.success) throw new Error(result.error || 'Webhook failed');
+        return result;
+    }
+
+    // Fallback to standard SMTP (Will be blocked on Render Free)
+    console.log(`[EMAIL] Sending via SMTP to ${to}`);
+    return transporter.sendMail({
         from: `"D-Vote Security" <${process.env.SMTP_USER}>`,
-        to: email,
-        subject: '🔒 Your D-Vote Verification Code',
-        text: `Your verification code is: ${otp}. This code will expire in 5 minutes.`,
-        html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                <h2 style="color: #6366f1; text-align: center;">D-Vote Identity Verification</h2>
-                <p>Hello,</p>
-                <p>You are receiving this email because a registration request was initiated on the D-Vote Network.</p>
-                <div style="background: #f4f4f9; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
-                    <span style="font-size: 32px; font-weight: bold; letter-spacing: 10px; color: #1e1e2e;">${otp}</span>
-                </div>
-                <p style="color: #666; font-size: 12px; text-align: center;">This code is valid for 5 minutes. If you did not request this, please ignore this email.</p>
+        to,
+        subject,
+        text,
+        html
+    });
+};
+
+exports.sendOTP = async (email, otp) => {
+    const subject = '🔒 Your D-Vote Verification Code';
+    const text = `Your verification code is: ${otp}. This code will expire in 5 minutes.`;
+    const html = `
+        <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="color: #6366f1; text-align: center;">D-Vote Identity Verification</h2>
+            <p>Hello,</p>
+            <p>You are receiving this email because a registration request was initiated on the D-Vote Network.</p>
+            <div style="background: #f4f4f9; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
+                <span style="font-size: 32px; font-weight: bold; letter-spacing: 10px; color: #1e1e2e;">${otp}</span>
             </div>
-        `
-    };
-    return transporter.sendMail(mailOptions);
+            <p style="color: #666; font-size: 12px; text-align: center;">This code is valid for 5 minutes. If you did not request this, please ignore this email.</p>
+        </div>
+    `;
+    return sendEmail(email, subject, text, html);
 };
 
 exports.sendRegistrationSuccess = async (email, name) => {
-    const mailOptions = {
-        from: `"D-Vote Security" <${process.env.SMTP_USER}>`,
-        to: email,
-        subject: '🎉 Registration Successful - D-Vote Network',
-        html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                <h2 style="color: #6366f1; text-align: center;">Welcome to D-Vote!</h2>
-                <p>Hello ${name},</p>
-                <p>Your registration request has been successfully received. While your identity details are being processed and verified by the network administrators, your account status is currently <strong>PENDING</strong>.</p>
-                <p>You will receive another notification once your identity has been approved.</p>
-                <div style="background: #f4f4f9; padding: 15px; text-align: center; border-radius: 10px; margin: 20px 0;">
-                    <span style="color: #555;">Status: <strong style="color: #f59e0b;">PENDING</strong></span>
-                </div>
+    const subject = '🎉 Registration Successful - D-Vote Network';
+    const html = `
+        <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="color: #6366f1; text-align: center;">Welcome to D-Vote!</h2>
+            <p>Hello ${name},</p>
+            <p>Your registration request has been successfully received. While your identity details are being processed and verified by the network administrators, your account status is currently <strong>PENDING</strong>.</p>
+            <p>You will receive another notification once your identity has been approved.</p>
+            <div style="background: #f4f4f9; padding: 15px; text-align: center; border-radius: 10px; margin: 20px 0;">
+                <span style="color: #555;">Status: <strong style="color: #f59e0b;">PENDING</strong></span>
             </div>
-        `
-    };
-    return transporter.sendMail(mailOptions);
+        </div>
+    `;
+    return sendEmail(email, subject, '', html);
 };
 
 exports.sendApprovalNotification = async (email, name) => {
-    const mailOptions = {
-        from: `"D-Vote Security" <${process.env.SMTP_USER}>`,
-        to: email,
-        subject: '✅ Identity Approved - D-Vote Network',
-        html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                <h2 style="color: #22c55e; text-align: center;">Identity Verified!</h2>
-                <p>Hello ${name},</p>
-                <p>Congratulations! Your identity has been verified and approved by the network administrators. You now have full access to participate in elections.</p>
-                <div style="background: #f0fdf4; padding: 15px; text-align: center; border-radius: 10px; margin: 20px 0;">
-                    <span style="color: #166534;">Status: <strong style="color: #22c55e;">APPROVED</strong></span>
-                </div>
-                <p style="text-align: center;">
-                    <a href="http://localhost:5173" style="background-color: #6366f1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Go to Dashboard</a>
-                </p>
+    const subject = '✅ Identity Approved - D-Vote Network';
+    const html = `
+        <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+            <h2 style="color: #22c55e; text-align: center;">Identity Verified!</h2>
+            <p>Hello ${name},</p>
+            <p>Congratulations! Your identity has been verified and approved by the network administrators. You now have full access to participate in elections.</p>
+            <div style="background: #f0fdf4; padding: 15px; text-align: center; border-radius: 10px; margin: 20px 0;">
+                <span style="color: #166534;">Status: <strong style="color: #22c55e;">APPROVED</strong></span>
             </div>
-        `
-    };
-    return transporter.sendMail(mailOptions);
+            <p style="text-align: center;">
+                <a href="http://localhost:5173" style="background-color: #6366f1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Go to Dashboard</a>
+            </p>
+        </div>
+    `;
+    return sendEmail(email, subject, '', html);
 };
