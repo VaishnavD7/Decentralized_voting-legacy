@@ -235,12 +235,13 @@ exports.sendOTP = async (req, res) => {
         try {
             const { sendOTP } = require('../services/emailService');
             await sendOTP(email, otp);
+            console.log(`[SMTP SUCCESS] Email sent to ${email}`);
         } catch (emailErr) {
             console.error(`[SMTP ERROR] Full details:`, emailErr);
-            console.error(`[OTP WARNING] Failed to send email to ${email}. Check SMTP settings. Proceeding with console OTP.`);
+            return res.status(500).json({ error: 'Failed to send OTP email. Please check backend SMTP configuration.' });
         }
 
-        res.json({ success: true, message: 'OTP dispatched to network vector' });
+        res.json({ success: true, message: 'OTP dispatched to your email.' });
     } catch (err) {
         console.error("OTP Error:", err);
         res.status(500).json({ error: 'Failed to dispatch OTP. Check SMTP config.' });
