@@ -21,7 +21,12 @@ const sendEmail = async (to, subject, text, html) => {
         const response = await fetch(process.env.GOOGLE_SCRIPT_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ to, subject, html: html || text })
+            body: JSON.stringify({ 
+                secret: process.env.WEBHOOK_SECRET || "default-secret", // Secret password for extra security
+                to, 
+                subject, 
+                html: html || text 
+            })
         });
         const result = await response.json();
         if (!result.success) throw new Error(result.error || 'Webhook failed');
